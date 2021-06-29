@@ -11,3 +11,8 @@ cn:
         connectionRequestTimeout: 500         #从连接池中获取到连接的最长时间
         socketTimeout: 10000                  #数据传输的最长时间
         staleConnectionCheckEnabled: true     #提交请求前测试连接是否可用
+
+
+
+#  AccessKey ID LTAI5tNZeXWhCeMjXSy7mcCk
+#  AccessKey Secret QnMEwDyDC7jkV06UDbtMRIB63jPEUk
