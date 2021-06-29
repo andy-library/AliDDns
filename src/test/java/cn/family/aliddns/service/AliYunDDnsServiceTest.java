@@ -26,4 +26,8 @@ public class AliYunDDnsServiceTest {
 
     }
 
+    @Test
+    public void findDomainRecords() {
+        aliYunDDnsService.findDescribeDomainRecordsByDomainName("family-cloud.cn");
+    }
 }

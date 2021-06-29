@@ -1,5 +1,7 @@
 package cn.family.aliddns.service;
 
+import java.util.List;
+
 /**
  * 版权所有(C) SEPHORA 2020-2030
  * Copyright 2020-2030 SEPHORA
@@ -14,5 +16,12 @@ public interface IAliYunDDnsService {
      * @return
      */
     String getCurrentHostIP();
+
+    /**
+     * 获取当前域名解析列表
+     * @param domainName
+     * @return
+     */
+    List<Object> findDescribeDomainRecordsByDomainName(String domainName);
 
 }
