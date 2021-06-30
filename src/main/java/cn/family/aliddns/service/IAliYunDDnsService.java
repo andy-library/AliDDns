@@ -1,5 +1,7 @@
 package cn.family.aliddns.service;
 
+import cn.family.aliddns.model.DomainRecords;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,17 @@ public interface IAliYunDDnsService {
      * @param domainName
      * @return
      */
-    List<Object> findDescribeDomainRecordsByDomainName(String domainName);
+    List<DomainRecords> findDescribeDomainRecordsByDomainName(String domainName);
+
+    /**
+     * 修改域名解析地址
+     * @param records
+     */
+    void updateDescribeDomainRecordsByRecordId(DomainRecords records);
+
+    /**
+     * 管理DNS解析
+     */
+    void manageDescribeDomainRecords();
 
 }

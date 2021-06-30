@@ -18,6 +18,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.net.ssl.SSLContext;
@@ -39,7 +40,7 @@ import java.util.Set;
  * 创建日期：2019-01-08 18:04
  * 创建人：Andy.Yang
  */
-@Service
+@Component
 public class HttpClientServiceImpl implements HttpClientService {
 
     @Autowired

@@ -1,10 +1,13 @@
 package cn.family.aliddns.service;
 
+import cn.family.aliddns.model.DomainRecords;
 import cn.family.aliddns.model.HostIPModel;
 import cn.family.aliddns.utils.FastJsonUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 /**
  * 版权所有(C) SEPHORA 2020-2030
@@ -30,4 +33,19 @@ public class AliYunDDnsServiceTest {
     public void findDomainRecords() {
         aliYunDDnsService.findDescribeDomainRecordsByDomainName("family-cloud.cn");
     }
+
+    @Test
+    public void updateDomainRecords() {
+        List<DomainRecords> recordsList = aliYunDDnsService.findDescribeDomainRecordsByDomainName("family-cloud.cn");
+        if(null != recordsList) {
+            String ip = "2.2.2.2";
+            for(DomainRecords records : recordsList){
+                if("router".equals(records.getRr())){
+                    records.setValue(ip);
+                    aliYunDDnsService.updateDescribeDomainRecordsByRecordId(records);
+                }
+            }
+        }
+    }
+
 }
