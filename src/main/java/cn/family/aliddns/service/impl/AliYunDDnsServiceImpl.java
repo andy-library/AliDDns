@@ -126,16 +126,20 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
     public void manageDescribeDomainRecords() {
         //获取当前公网IP
         String currentIp = this.getCurrentHostIP();
-        //获取当前域名解析列表
-        List<DomainRecords> currentRecords = this.findDescribeDomainRecordsByDomainName(domainName);
 
-        if(null != currentRecords){
-            currentRecords.forEach(records -> {
-                if(!currentIp.equals(records.getValue())){
-                    records.setValue(currentIp);
-                    this.updateDescribeDomainRecordsByRecordId(records);
-                }
-            });
+        if(null != currentIp){
+            //获取当前域名解析列表
+            List<DomainRecords> currentRecords = this.findDescribeDomainRecordsByDomainName(domainName);
+
+            if(null != currentRecords){
+                currentRecords.forEach(records -> {
+                    if(!currentIp.equals(records.getValue())){
+                        records.setValue(currentIp);
+                        this.updateDescribeDomainRecordsByRecordId(records);
+                    }
+                });
+            }
         }
+
     }
 }
