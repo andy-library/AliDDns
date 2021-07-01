@@ -138,6 +138,7 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
                         this.updateDescribeDomainRecordsByRecordId(records);
                     }
                 });
+
             }
         }
     }
