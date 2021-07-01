@@ -124,15 +124,15 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
 
     @Override
     public void manageDescribeDomainRecords() {
-        //获取当前公网IP
-        String currentIp = this.getCurrentHostIP();
-
-        if(null != currentIp){
-            //获取当前域名解析列表
-            List<DomainRecords> currentRecords = this.findDescribeDomainRecordsByDomainName(domainName);
-
-            if(null != currentRecords){
+        //获取当前域名解析列表
+        List<DomainRecords> currentRecords = this.findDescribeDomainRecordsByDomainName(domainName);
+        if(null != currentRecords){
+            //获取当前公网IP
+            String currentIp = this.getCurrentHostIP();
+            //获取公网IP时可能connect timed out,增加一次非空判断
+            if(null != currentIp){
                 currentRecords.forEach(records -> {
+                    //如果已解析的IP和当前公网IP不符,则更新
                     if(!currentIp.equals(records.getValue())){
                         records.setValue(currentIp);
                         this.updateDescribeDomainRecordsByRecordId(records);
@@ -140,6 +140,5 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
                 });
             }
         }
-
     }
 }
