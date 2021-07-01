@@ -48,4 +48,9 @@ public class AliYunDDnsServiceTest {
         }
     }
 
+    @Test
+    public void manageDescribeDomainRecordsTest() {
+        aliYunDDnsService.manageDescribeDomainRecords();
+    }
+
 }

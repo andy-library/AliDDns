@@ -7,13 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * 版权所有(C) SEPHORA 2018-2028
- * Copyright 2018-2028 SEPHORA
- * 创建日期：2019-04-23 17:07
- * 创建人：Andy.Yang
- */
-
 public class DateUtils {
 
 

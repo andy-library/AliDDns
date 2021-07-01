@@ -10,12 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-/**
- * 版权所有(C) SEPHORA 2018-2028
- * Copyright 2018-2028 SEPHORA
- * 创建日期：2019-01-08 17:41
- * 创建人：Andy.Yang
- */
 @Configuration
 public class HttpClient {
 

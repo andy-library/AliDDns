@@ -4,13 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-/**
- * 版权所有(C) SEPHORA 2018-2028
- * Copyright 2018-2028 SEPHORA
- * 创建日期：2019-01-09 14:27
- * 创建人：Andy.Yang
- */
-
 public class FastJsonUtils {
 
     private static final SerializerFeature[] features = {

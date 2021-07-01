@@ -9,13 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * 版权所有(C) SEPHORA 2018-2028
- * Copyright 2018-2028 SEPHORA
- * 创建日期：2019-01-08 18:04
- * 创建人：Andy.Yang
- */
-
 public interface HttpClientService {
 
     /**
