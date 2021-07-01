@@ -12,12 +12,10 @@ cn:
         socketTimeout: 10000                  #数据传输的最长时间
         staleConnectionCheckEnabled: true     #提交请求前测试连接是否可用
   aliyun:
-    regionId: 'cn-hangzhou'
-    accessKey: 'LTAI5tNZeXWhCeMjXSy7mcCk'
-    accessSecret: 'QnMEwDyDC7jkV06UDbtMRIB63jPEUk'
+    regionId: ${REGION_ID}
+    accessKey: ${ACCESS_KEY}
+    accessSecret: ${ACCESS_SECRET}
   config:
-    url: 'https://jsonip.com'
-    domainName: 'family-cloud.cn'
-
-
+    check_url: ${CHECK_URL}
+    domainName: ${DOMAIN_NAME}
 
