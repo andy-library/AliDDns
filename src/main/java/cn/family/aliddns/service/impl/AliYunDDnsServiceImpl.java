@@ -61,7 +61,7 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
     public String getCurrentHostIP() {
         if(null != check_url && !"".equals(check_url)){
             try {
-                String jsonData = httpClientService.doGet(check_url);
+                String jsonData = httpClientService.doGet(check_url.trim());
                 //解析返回的结果集
                 HostIPModel hostIPModel = FastJsonUtils.convertJsonToObject(jsonData, HostIPModel.class);
                 //判断非空并返回IP地址
@@ -128,7 +128,6 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
 
     @Override
     public void manageDescribeDomainRecords() {
-        System.out.println("要解析的域名是 ： " + domainName);
         if(null != domainName && !"".equals(domainName)){
             //获取当前域名解析列表
             List<DomainRecords> currentRecords = this.findDescribeDomainRecordsByDomainName(domainName);
@@ -138,6 +137,7 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
                 //获取公网IP时可能connect timed out,增加一次非空判断
                 if(null != currentIp){
                     currentRecords.forEach(records -> {
+                        System.out.println("替换前: " + records.getRr() + "." + records.getDomainName() + " : " + records.getValue());
                         //如果已解析的IP和当前公网IP不符,则更新
                         if(!currentIp.equals(records.getValue())){
                             records.setValue(currentIp);
