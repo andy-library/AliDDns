@@ -1,7 +1,6 @@
 package cn.family.aliddns.service.impl;
 
 import cn.family.aliddns.model.DomainRecords;
-import cn.family.aliddns.model.HostIPModel;
 import cn.family.aliddns.service.HttpClientService;
 import cn.family.aliddns.service.IAliYunDDnsService;
 import cn.family.aliddns.utils.FastJsonUtils;
@@ -20,6 +19,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
@@ -63,10 +64,13 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
             try {
                 String jsonData = httpClientService.doGet(check_url.trim());
                 //解析返回的结果集
-                HostIPModel hostIPModel = FastJsonUtils.convertJsonToObject(jsonData, HostIPModel.class);
+                Map<String,String> hostIPModel = FastJsonUtils.convertJsonToObject(jsonData, new TypeReference<Map<String,String>>(){});
                 //判断非空并返回IP地址
-                if (null != hostIPModel && null != hostIPModel.getIp() && !"".equals(hostIPModel.getIp())) {
-                    return hostIPModel.getIp();
+                if (null != hostIPModel && hostIPModel.size() > 0) {
+                    String currentIp = hostIPModel.get("ip");
+                    if(!StringUtils.isEmpty(currentIp)){
+                        return currentIp;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -136,14 +140,18 @@ public class AliYunDDnsServiceImpl implements IAliYunDDnsService {
                 String currentIp = this.getCurrentHostIP();
                 //获取公网IP时可能connect timed out,增加一次非空判断
                 if(null != currentIp){
+                    System.out.println("当前IP：" + currentIp);
+                    AtomicInteger i = new AtomicInteger();
                     currentRecords.forEach(records -> {
                         System.out.println("替换前: " + records.getRr() + "." + records.getDomainName() + " : " + records.getValue());
                         //如果已解析的IP和当前公网IP不符,则更新
                         if(!currentIp.equals(records.getValue())){
                             records.setValue(currentIp);
                             this.updateDescribeDomainRecordsByRecordId(records);
+                            i.getAndIncrement();
                         }
                     });
+                    System.out.println("共替换：" + i + "条解析");
                 }
             }
         }
